@@ -1,0 +1,60 @@
+workflows:
+  ios-release:
+    name: iOS Release
+    instance_type: mac_mini_m2
+    max_build_duration: 30
+    integrations:
+      app_store_connect: "App Store Connect API Key"  # Configure in Codemagic dashboard
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.developer.glowdash
+      vars:
+        XCODE_SCHEME: "GlowDash"
+        BUNDLE_ID: "com.developer.glowdash"
+      xcode: latest
+      cocoapods: default
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: main
+          include: true
+    scripts:
+      # 1. Install XcodeGen to generate Xcode project from project.yml
+      - name: Install XcodeGen
+        script: |
+          brew install xcodegen
+
+      # 2. Generate .xcodeproj from project.yml
+      - name: Generate Xcode project
+        script: |
+          xcodegen generate
+
+      # 3. Install CocoaPods dependencies (Google Mobile Ads SDK)
+      - name: Install CocoaPods dependencies
+        script: |
+          pod install
+
+      # 4. Set up code signing profiles
+      - name: Set up code signing
+        script: |
+          xcode-project use-profiles
+
+      # 5. Build the IPA (using .xcworkspace since CocoaPods creates it)
+      - name: Build IPA
+        script: |
+          xcode-project build-ipa \
+            --workspace "GlowDash.xcworkspace" \
+            --scheme "$XCODE_SCHEME"
+
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        beta_groups:
+          - "Internal Testers"
