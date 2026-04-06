@@ -40,7 +40,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private var currentColorIndex: Int = 0
     private var isGameActive: Bool = false
-    private var isPaused: Bool = false
+    private var isGamePaused: Bool = false
     private var isShowingDeathOverlay: Bool = false
 
     // MARK: - Computed Properties
@@ -158,7 +158,7 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Handle tap on pause overlay to resume
-        if isPaused {
+        if isGamePaused {
             resumeGame()
             return
         }
@@ -186,8 +186,8 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Pause / Resume
 
     private func pauseGame() {
-        guard isGameActive, !isPaused else { return }
-        isPaused = true
+        guard isGameActive, !isGamePaused else { return }
+        isGamePaused = true
         isGameActive = false
         physicsWorld.speed = 0
         gameManager.pause()
@@ -195,8 +195,8 @@ final class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func resumeGame() {
-        guard isPaused else { return }
-        isPaused = false
+        guard isGamePaused else { return }
+        isGamePaused = false
         hidePauseOverlay()
 
         // Reset lastUpdateTime so we don't get a huge delta spike
