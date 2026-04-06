@@ -57,8 +57,8 @@ final class AdManager: NSObject, ObservableObject {
 
     private func requestConsentAndInitialize() {
         // Step 1: Request UMP consent info update
-        let params = UMPRequestParameters()
-        params.tagForUnderAgeOfConsent = false
+        let params = RequestParameters()
+        params.isTaggedForUnderAgeOfConsent = false
 
         // For testing consent flow, uncomment:
         // let debugSettings = UMPDebugSettings()
@@ -66,7 +66,7 @@ final class AdManager: NSObject, ObservableObject {
         // debugSettings.geography = .EEA
         // params.debugSettings = debugSettings
 
-        UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(with: params) { [weak self] error in
+        ConsentInformation.shared.requestConsentInfoUpdate(with: params) { [weak self] error in
             guard let self else { return }
 
             if let error {
@@ -77,7 +77,7 @@ final class AdManager: NSObject, ObservableObject {
             }
 
             // Step 2: Show consent form if required
-            UMPConsentForm.loadAndPresentIfRequired(from: self.rootViewController) { [weak self] error in
+            ConsentForm.loadAndPresentIfRequired(from: self.rootViewController) { [weak self] error in
                 if let error {
                     print("[AdManager] Consent form error: \(error.localizedDescription)")
                 }
@@ -103,9 +103,9 @@ final class AdManager: NSObject, ObservableObject {
         guard !isInitialized else { return }
 
         // Check if we can request ads (consent was given or not required)
-        canRequestAds = UMPConsentInformation.sharedInstance.canRequestAds
+        canRequestAds = ConsentInformation.shared.canRequestAds
 
-        GADMobileAds.sharedInstance().start { [weak self] _ in
+        GADMobileAds.shared().start { [weak self] _ in
             guard let self else { return }
             self.isInitialized = true
             print("[AdManager] Mobile Ads SDK initialized. canRequestAds: \(self.canRequestAds)")
