@@ -336,7 +336,6 @@ extension SKEmitterNode {
         emitter.particleColor = color
         emitter.particleColorBlendFactor = 1.0
         emitter.particleSize = CGSize(width: GameConstants.trailParticleSize, height: GameConstants.trailParticleSize)
-        emitter.particleSizeRange = 2.0
         emitter.particleAlpha = 0.8
         emitter.particleAlphaSpeed = -2.0
         emitter.emissionAngle = .pi  // emit backward (left)
@@ -358,7 +357,6 @@ extension SKEmitterNode {
         emitter.particleColor = color
         emitter.particleColorBlendFactor = 1.0
         emitter.particleSize = CGSize(width: 4, height: 4)
-        emitter.particleSizeRange = 3
         emitter.particleAlpha = 1.0
         emitter.particleAlphaSpeed = -2.5
         emitter.emissionAngle = .pi / 2  // upward
@@ -379,7 +377,6 @@ extension SKEmitterNode {
         emitter.particleColor = color
         emitter.particleColorBlendFactor = 1.0
         emitter.particleSize = CGSize(width: 6, height: 6)
-        emitter.particleSizeRange = 4
         emitter.particleAlpha = 1.0
         emitter.particleAlphaSpeed = -1.8
         emitter.emissionAngle = 0
