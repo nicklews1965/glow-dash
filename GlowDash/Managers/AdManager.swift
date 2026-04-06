@@ -105,7 +105,7 @@ final class AdManager: NSObject, ObservableObject {
         // Check if we can request ads (consent was given or not required)
         canRequestAds = ConsentInformation.shared.canRequestAds
 
-        GADMobileAds.shared().start { [weak self] _ in
+        GADMobileAds.sharedInstance().start { [weak self] _ in
             guard let self else { return }
             self.isInitialized = true
             print("[AdManager] Mobile Ads SDK initialized. canRequestAds: \(self.canRequestAds)")
