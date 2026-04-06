@@ -234,8 +234,8 @@ final class BackgroundEntity: GKEntity {
     func updateColor(_ color: UIColor) {
         // Update mid-layer shapes
         for shape in midShapes {
-            shape.fillColor = color.withAlphaComponent(shape.fillColor.alphaComponent)
-            shape.strokeColor = color.withAlphaComponent(shape.strokeColor.alphaComponent)
+            shape.fillColor = color.withAlphaComponent(shape.fillColor.cgColor.alpha)
+            shape.strokeColor = color.withAlphaComponent(shape.strokeColor.cgColor.alpha)
         }
     }
 }
