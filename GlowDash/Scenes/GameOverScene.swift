@@ -302,7 +302,7 @@ final class GameOverScene: SKScene {
             skView.drawHierarchy(in: skView.bounds, afterScreenUpdates: true)
         }
 
-        let shareText = "I scored \(scoreManager.currentScore) in Glow Dash! Can you beat me? \(GameConstants.shareHashtag)"
+        let shareText = "I scored \(scoreManager.currentScore) in LitFlap! Can you beat me? \(GameConstants.shareHashtag)"
 
         let activityVC = UIActivityViewController(
             activityItems: [shareText, screenshot],
