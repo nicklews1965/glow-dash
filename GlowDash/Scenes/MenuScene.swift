@@ -106,7 +106,7 @@ final class MenuScene: SKScene {
 
         // Title inside panel
         let title = SKLabelNode(fontNamed: "AvenirNext-Heavy")
-        title.text = "GLOW DASH"
+        title.text = "LITFLAP"
         title.fontSize = 44
         title.fontColor = neonColor
         title.position = CGPoint(x: centerX, y: panelTop - 60)
