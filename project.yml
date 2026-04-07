@@ -40,7 +40,5 @@ targets:
         Release:
           SWIFT_OPTIMIZATION_LEVEL: "-O"
     dependencies:
-      - framework: SpriteKit.framework
-        implicit: true
-      - framework: GameplayKit.framework
-        implicit: true
+      - sdk: SpriteKit.framework
+      - sdk: GameplayKit.framework
