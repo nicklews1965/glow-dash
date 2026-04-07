@@ -12,6 +12,7 @@ workflows:
       vars:
         XCODE_SCHEME: "GlowDash"
         BUNDLE_ID: "com.developer.glowdash"
+        APP_STORE_APPLE_ID: "6761740652"
       xcode: latest
       cocoapods: default
     triggering:
@@ -21,27 +22,26 @@ workflows:
         - pattern: main
           include: true
     scripts:
-      # 1. Install XcodeGen to generate Xcode project from project.yml
       - name: Install XcodeGen
         script: |
           brew install xcodegen
 
-      # 2. Generate .xcodeproj from project.yml
       - name: Generate Xcode project
         script: |
           xcodegen generate
 
-      # 3. Install CocoaPods dependencies (Google Mobile Ads SDK)
       - name: Install CocoaPods dependencies
         script: |
           pod install
 
-      # 4. Set up code signing profiles
       - name: Set up code signing
         script: |
           xcode-project use-profiles
 
-      # 5. Build the IPA (using .xcworkspace since CocoaPods creates it)
+      - name: Set build number
+        script: |
+          agvtool new-version -all $PROJECT_BUILD_NUMBER
+
       - name: Build IPA
         script: |
           xcode-project build-ipa \
