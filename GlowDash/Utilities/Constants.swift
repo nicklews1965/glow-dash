@@ -1,6 +1,6 @@
 import CoreGraphics
 import Foundation
-// Glow Dash v1.0 - Game Constants
+// LitFlap v1.0 - Game Constants
 
 enum GameConstants {
 
