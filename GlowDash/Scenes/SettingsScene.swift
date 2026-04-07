@@ -123,7 +123,7 @@ final class SettingsScene: SKScene {
 
         // Version info at bottom of panel
         let versionLabel = SKLabelNode(fontNamed: "AvenirNext-Regular")
-        versionLabel.text = "Glow Dash v1.0"
+        versionLabel.text = "LitFlap v1.0"
         versionLabel.fontSize = 11
         versionLabel.fontColor = UIColor.white.withAlphaComponent(0.2)
         versionLabel.position = CGPoint(x: centerX, y: size.height * 0.55 - panelHeight / 2 + 15)
